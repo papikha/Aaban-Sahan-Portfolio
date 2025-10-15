@@ -4,5 +4,17 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [
+    react(),
+    tailwindcss(),
+  ],
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:8000", // productionda degistir lan bunu ihtiyacimiz olmaz
+        changeOrigin: true, // csrf sorunu cikmasin diye ekledim zaten
+        secure: false
+      }
+    }
+  }
 })
